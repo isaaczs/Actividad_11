@@ -1,5 +1,6 @@
 package com.zermeno.isaac.actividad_11;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.MediaController;
@@ -32,9 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void releasePlayer() {mVideoView.stopPlayback();}
 
+
     @Override
     protected void onStop(){
         super.onStop();
         releasePlayer();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
+        {
+            mVideoView.pause();
+        }
     }
 }
